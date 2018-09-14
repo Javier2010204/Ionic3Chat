@@ -42,4 +42,8 @@ export class LoginPage {
     this.navCtrl.setRoot('SignupPage');
   }
 
+  passwordReset(){
+    this.navCtrl.push('PasswordResetPage');
+  }
+
 }

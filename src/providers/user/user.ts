@@ -43,4 +43,17 @@ export class UserProvider {
     return promise;
   }
 
+  passwordReset(email: string){
+    // send email for reset password
+    var promise = new Promise( (resolve, reject) => {
+      firebase.auth().sendPasswordResetEmail(email).then( () => {
+        resolve({success: true})
+      }).catch((err) => {
+        reject(err);
+      })  
+    })
+    return promise;
+  }
+
+
 }

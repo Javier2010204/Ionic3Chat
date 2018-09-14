@@ -14,5 +14,13 @@
 
 
 <ion-content padding>
-
+  <div class="profile-image">
+    {{imageUrl}}
+  </div>
+  <div [hidden]="moveon">
+    <button ion-button round outline (click)="proceed()">Choose an image</button>
+  </div>
+  <div [hidden]="moveon">
+    <button ion-button round outline (click)="proceed()">Cambiar Imagen</button>
+  </div>
 </ion-content>

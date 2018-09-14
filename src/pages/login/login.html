@@ -21,7 +21,7 @@
         <button ion-button block outline color="light" (click)="signin()">Login</button>
         <p>OR</p>
         <button ion-button clear full color="light" (click)="signup()">Don't have an account? Sign up</button>
-        <a href="#">Forgot your login details? <b>Get help signing in</b></a>
+        <a (click)="passwordReset()">Forgot your login details? <b>Get help signing in</b></a>
       </ion-list>
     </ion-card-content>
   </ion-card>
