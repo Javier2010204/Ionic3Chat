@@ -58,9 +58,6 @@ export class UserProvider {
 
   updateImage(imageUrl){
     var promise = new Promise((resolve, reject) => {
-      let alert = this.alertCtrl.create({
-        buttons: ['Ok']
-      });
       this.afireauth.auth.currentUser.updateProfile({
         displayName: this.afireauth.auth.currentUser.displayName,
         photoURL: imageUrl
@@ -70,17 +67,11 @@ export class UserProvider {
           photoURL: imageUrl,
           uid: firebase.auth().currentUser.uid
         }).then(() => {
-          alert.setTitle('Exitoso');
-          alert.present();
           resolve({success: true});
         }).catch((err) => {
-          alert.setTitle('Fallo ' + err);
-          alert.present();
           reject(err);
         })
       }).catch((err) => {
-        alert.setTitle('Fallo ' + err);
-        alert.present();
         reject(err);
       })
     })

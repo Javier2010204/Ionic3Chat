@@ -15,9 +15,9 @@
 
 <ion-content padding>
   <div class="profile-image">
-    <img src="{{imageUrl}}">
+    <ion-img class="imagen" [src]="imgUrl"></ion-img>
   </div>
-  <div [hidden]="moveon">
+  <div [hidden]="!moveon">
     <button ion-button round outline (click)="proceed()">Omitir este paso</button>
   </div>
   <div [hidden]="!moveon">
