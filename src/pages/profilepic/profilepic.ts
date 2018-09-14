@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ImageHandlerProvider } from '../../providers/image-handler/image-handler';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the ProfilepicPage page.
@@ -14,12 +16,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profilepic.html',
 })
 export class ProfilepicPage {
+  
+  imgUrl='https://firebasestorage.googleapis.com/v0/b/ionic3chat-676c6.appspot.com/o/default-user.png?alt=media&token=c38e2c29-6829-4247-921f-1db132287d2d';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  moveon = true;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public imageHandler : ImageHandlerProvider, public zone : NgZone, public userProvider : UserProvider, public alertCtrl : AlertController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilepicPage');
+
+  }
+
+  chooseImage(){
+    this.imageHandler.uploadImage().then((uploadedUrl:any) => {
+      this.zone.run(() => {
+        this.imgUrl = uploadedUrl;
+        this.moveon = false;
+      })
+    })
+  }
+
+  updateProceed(){
+    this.userProvider.updateImage(this.imgUrl).then((res:any) => {
+      if(res.success){
+        this.navCtrl.setRoot('TabsPage');
+      }else{
+        let alert = this.alertCtrl.create({
+          buttons:['Ok']
+        });
+        alert.setTitle('Fallo ' + res);
+        alert.present();
+      }
+    })
+  }
+
+  proceed(){
+    this.navCtrl.setRoot('TabsPage');
   }
 
 }

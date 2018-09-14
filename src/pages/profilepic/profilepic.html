@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>profilepic</ion-title>
+  <ion-navbar color="facebook">
+    <ion-title>Foto de Perfil</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,12 +15,12 @@
 
 <ion-content padding>
   <div class="profile-image">
-    {{imageUrl}}
+    <img src="{{imageUrl}}">
   </div>
   <div [hidden]="moveon">
-    <button ion-button round outline (click)="proceed()">Choose an image</button>
+    <button ion-button round outline (click)="proceed()">Omitir este paso</button>
   </div>
-  <div [hidden]="moveon">
-    <button ion-button round outline (click)="proceed()">Cambiar Imagen</button>
+  <div [hidden]="!moveon">
+    <button ion-button round outline (click)="updateProceed()">Cambiar Imagen</button>
   </div>
 </ion-content>
